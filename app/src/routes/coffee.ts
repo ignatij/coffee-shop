@@ -8,5 +8,7 @@ router.get('/', async (_, response: Response) => {
 })
 
 router.post('/', async (req: Request, response: Response) => {
-  return response.json(await insertCoffee(req.body['title']))
+  return response.json(
+    await insertCoffee(req.body['title'], req.body['ingredients']),
+  )
 })

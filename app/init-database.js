@@ -27,12 +27,12 @@ const dbClient = new Client({
 const createDatabase = async () => {
   try {
     await pgClient.connect()
-    await pgClient.query(`DROP DATABASE IF EXISTS ${database}`)
+    await pgClient.query(`DROP DATABASE IF EXISTS ${database} WITH (FORCE)`)
     await pgClient.query(`CREATE DATABASE ${database}`)
 
     await dbClient.connect()
     await dbClient.query(
-      `CREATE TABLE coffee (id UUID NOT NULL, title TEXT NOT NULL)`,
+      `CREATE TABLE coffee (id UUID NOT NULL, title TEXT NOT NULL, ingredients TEXT[] DEFAULT '{}')`,
     )
     return true
   } catch (e) {

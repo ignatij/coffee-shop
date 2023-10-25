@@ -4,8 +4,14 @@ import { Coffee } from '../model/coffee'
 
 export const findAllQuery = 'select * from coffee'
 
-export const insertQuery = (id: UUID, title: string): string =>
-  `INSERT INTO coffee (id, title) VALUES ('${id}', '${title}')`
+export const insertQuery = (
+  id: UUID,
+  title: string,
+  ingredients: string[] = [],
+): string =>
+  `INSERT INTO coffee (id, title, ingredients) VALUES ('${id}', '${title}', '{${ingredients.join(
+    ',',
+  )}}')`
 
 export const findAll = async (): Promise<Coffee[]> => {
   try {
@@ -19,10 +25,10 @@ export const findAll = async (): Promise<Coffee[]> => {
   }
 }
 
-export const insert = async (title: string): Promise<Coffee> => {
+export const insert = async (title: string, ingredients?: string[]): Promise<Coffee> => {
   try {
     const uid = randomUUID()
-    const insertStatement = insertQuery(uid, title)
+    const insertStatement = insertQuery(uid, title, ingredients)
     const result = await pool.query(insertStatement)
     return result.rows[0]
   } catch (e) {

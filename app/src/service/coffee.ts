@@ -5,7 +5,9 @@ export const findAllCoffees = async (): Promise<Coffee[]> => {
   return await findAll()
 }
 
-export const insertCoffee = async (title: string): Promise<Coffee> => {
-  return await insert(title)
+export const insertCoffee = async (
+  title: string,
+  ingredients?: string[],
+): Promise<Coffee> => {
+  return await insert(title, ingredients)
 }
-
