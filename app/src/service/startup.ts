@@ -50,10 +50,10 @@ const coffesFs = [
 ]
 
 export const initCoffees = async () => {
-  //   const coffees = await findExternalCoffees()
   const isTableEmpty = await isEmpty()
   if (isTableEmpty) {
-    coffesFs.slice(0, 5).forEach(async ({ title, ingredients }) => {
+    const coffees = await findExternalCoffees()
+    coffees.slice(0, 5).forEach(async ({ title, ingredients }) => {
       await insertCoffee(title, ingredients)
     })
   } else {

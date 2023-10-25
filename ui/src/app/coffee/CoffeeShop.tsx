@@ -1,10 +1,14 @@
 import { CoffeeManager } from './CoffeeManager'
-import { PredefinedCoffees } from './PredefinedCoffees'
+import { ExternalCoffeesSelector } from './ExternalCoffeesSelector'
+import { PredefinedCoffeesSelector } from './PredefinedCoffeesSelector'
+import { PreviewCoffeeOrder } from './PreviewCoffeeOrder'
 
 export const CoffeeShop = () => {
   return (
     <CoffeeManager>
-      <PredefinedCoffees />
+      <PredefinedCoffeesSelector />
+      <ExternalCoffeesSelector />
+      <PreviewCoffeeOrder />
     </CoffeeManager>
   )
 }

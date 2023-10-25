@@ -5,11 +5,13 @@
   "scripts": {
     "app:init-db": "yarn workspace app run init-db",
     "app:dev": "yarn workspace app run dev",
+    "external-api-service:up": "yarn workspace external-api-service run start",
     "ui:dev": "yarn workspace ui run dev"
   },
   "workspaces": [
     "app",
-    "ui"
+    "ui",
+    "external-api-service"
   ],
   "devDependencies": {
     "typescript": "^5.2.2"
