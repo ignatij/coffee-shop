@@ -1,0 +1,12 @@
+{
+  "name": "coffee-shop",
+  "packageManager": "yarn@4.0.0",
+  "private": true,
+  "workspaces": [
+    "app",
+    "ui"
+  ],
+  "devDependencies": {
+    "typescript": "^5.2.2"
+  }
+}
