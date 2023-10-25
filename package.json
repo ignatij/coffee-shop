@@ -2,6 +2,9 @@
   "name": "coffee-shop",
   "packageManager": "yarn@4.0.0",
   "private": true,
+  "scripts": {
+    "app:dev": "yarn workspace app run dev"
+  },
   "workspaces": [
     "app",
     "ui"
