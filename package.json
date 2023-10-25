@@ -3,6 +3,7 @@
   "packageManager": "yarn@4.0.0",
   "private": true,
   "scripts": {
+    "app:init-db": "yarn workspace app run init-db",
     "app:dev": "yarn workspace app run dev",
     "ui:dev": "yarn workspace ui run dev"
   },

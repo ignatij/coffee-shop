@@ -13,6 +13,8 @@ export const insertQuery = (
     ',',
   )}}')`
 
+export const checkIfThereAreCoffeesQuery = 'select true from coffee limit 1'
+
 export const findAll = async (): Promise<Coffee[]> => {
   try {
     const results = await pool.query(findAllQuery)
@@ -25,7 +27,10 @@ export const findAll = async (): Promise<Coffee[]> => {
   }
 }
 
-export const insert = async (title: string, ingredients?: string[]): Promise<Coffee> => {
+export const insert = async (
+  title: string,
+  ingredients?: string[],
+): Promise<Coffee> => {
   try {
     const uid = randomUUID()
     const insertStatement = insertQuery(uid, title, ingredients)
@@ -36,4 +41,9 @@ export const insert = async (title: string, ingredients?: string[]): Promise<Cof
     console.error(e)
     throw Error('Error while inserting a new coffee')
   }
+}
+
+export const isEmpty = async (): Promise<boolean> => {
+  const result = await pool.query(checkIfThereAreCoffeesQuery)
+  return result.rowCount === 0
 }

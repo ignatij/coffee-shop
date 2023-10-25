@@ -16,7 +16,15 @@ export const insertCoffee = async (
 export const findExternalCoffees = async (): Promise<Coffee[]> => {
   const externalUrl =
     process.env.EXTERNAL_API_URL ?? 'https://api.sampleapis.com/coffee/hot'
-  const response = await axios.get(externalUrl)
-  const coffees = response.data
-  return coffees.map(({ title, ingredients }: any) => ({ title, ingredients }))
+  try {
+    const response = await axios.get(externalUrl)
+    const coffees = response.data
+    return coffees.map(({ title, ingredients }: any) => ({
+      title,
+      ingredients,
+    }))
+  } catch (e) {
+    console.error(e)
+    throw new Error('Error while fetching external coffees')
+  }
 }
