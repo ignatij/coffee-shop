@@ -17,6 +17,6 @@ router.post('/', async (req: Request, response: Response) => {
   )
 })
 
-router.get('/external', async (req, response: Response) =>
+router.get('/external', async (_, response: Response) =>
   response.json(await findExternalCoffees()),
 )
