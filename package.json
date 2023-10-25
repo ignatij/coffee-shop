@@ -3,7 +3,8 @@
   "packageManager": "yarn@4.0.0",
   "private": true,
   "scripts": {
-    "app:dev": "yarn workspace app run dev"
+    "app:dev": "yarn workspace app run dev",
+    "ui:dev": "yarn workspace ui run dev"
   },
   "workspaces": [
     "app",
