@@ -1,5 +1,9 @@
 import { Request, Response, Router } from 'express'
-import { findAllCoffees, insertCoffee } from '../service/coffee'
+import {
+  findAllCoffees,
+  findExternalCoffees,
+  insertCoffee,
+} from '../service/coffee'
 
 export const router = Router()
 
@@ -12,3 +16,7 @@ router.post('/', async (req: Request, response: Response) => {
     await insertCoffee(req.body['title'], req.body['ingredients']),
   )
 })
+
+router.get('/external', async (req, response: Response) =>
+  response.json(await findExternalCoffees()),
+)
