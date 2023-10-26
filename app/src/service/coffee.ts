@@ -19,7 +19,8 @@ export const findExternalCoffees = async (): Promise<Coffee[]> => {
   try {
     const response = await axios.get(externalUrl)
     const coffees = response.data
-    return coffees.map(({ title, ingredients }: any) => ({
+    return coffees.map(({ id, title, ingredients }: any) => ({
+      id,
       title,
       ingredients,
     }))

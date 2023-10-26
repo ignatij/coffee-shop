@@ -11,8 +11,8 @@ export const PredefinedCoffeesSelector = () => {
         Please choose a predefined coffee from our system
       </Typography>
       <Select
-        onChange={(_, c: Coffee) => {
-          setOrder(() => c)
+        onChange={(_, c: Coffee | null) => {
+          setOrder(() => c ?? undefined)
         }}
       >
         {coffees.map((c: Coffee) => (

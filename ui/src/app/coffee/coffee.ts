@@ -3,3 +3,8 @@ export interface Coffee {
   title: string
   ingredients: string[]
 }
+
+export interface DecoratedCoffee extends Coffee {
+  coffee: Coffee
+  additionalIngredient: string
+}
