@@ -11,22 +11,28 @@ export interface DecoratedCoffee extends Coffee {
   additionalIngredient: string
 }
 
+const coffeeFields = gql`
+  fragment coffeeFields on Coffee {
+    id
+    title
+    ingredients
+  }
+`
+
 export const getCoffeeQuery = gql`
   query GetCoffees {
     coffees {
-      id
-      title
-      ingredients
+      ...coffeeFields
     }
   }
+  ${coffeeFields}
 `
 
 export const getExternalCoffeeQuery = gql`
   query GetCoffees {
     externalCoffees {
-      id
-      title
-      ingredients
+      ...coffeeFields
     }
   }
+  ${coffeeFields}
 `
