@@ -8,10 +8,12 @@
     "dev": "concurrently \"yarn tsc --watch\" \"nodemon -q dist/index.js\""
   },
   "dependencies": {
+    "@apollo/server": "^4.9.5",
     "axios": "^1.5.1",
     "cors": "^2.8.5",
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
+    "graphql": "^16.8.1",
     "node-postgres": "^0.6.2"
   },
   "devDependencies": {

@@ -1,17 +1,11 @@
-import { HttpContext } from '../core/HttpManager'
-import { Coffee } from './coffee'
+import { useQuery } from '@apollo/client'
 import React, {
-  PropsWithChildren,
-  useContext,
-  useState,
-  useEffect,
-  SetStateAction,
   Dispatch,
+  PropsWithChildren,
+  SetStateAction,
+  useState,
 } from 'react'
-import {
-  fetchCoffeesUrl,
-  fetchExternalCoffeesUrl,
-} from '../core/backend-endpoints.ts'
+import { Coffee, getCoffeeQuery, getExternalCoffeeQuery } from './coffee'
 
 export type CoffeeContextType = {
   coffees: Coffee[]
@@ -24,12 +18,28 @@ export type CoffeeContextType = {
 export const CoffeeContext = React.createContext({} as CoffeeContextType)
 
 export const CoffeeManager = ({ children }: PropsWithChildren) => {
-  const http = useContext(HttpContext)
-  const [coffees, setCoffees] = useState<Coffee[]>([])
-  const [externalCoffees, setExternalCoffees] = useState<Coffee[]>([])
-  const [ingredients, setIngredients] = useState<string[]>([])
   const [order, setOrder] = useState<Coffee>()
+  const coffeeQueryResult = useQuery(getCoffeeQuery)
+  const externalCoffeeQueryResult = useQuery(getExternalCoffeeQuery)
+  if (coffeeQueryResult.error || externalCoffeeQueryResult.error) {
+    console.error(
+      'Error with Apollo client',
+      coffeeQueryResult.error || externalCoffeeQueryResult.error,
+    )
+    throw new Error('Error while fetching list of coffees')
+  }
 
+  const setIngredientsFromExternalCoffees = (coffees: Coffee[]): string[] => {
+    const ingredients = new Set(coffees.flatMap((c: Coffee) => c.ingredients))
+    return [...ingredients]
+  }
+
+  /**
+ * the REST way, we would have the following functions
+ * 
+ *   
+ *
+ * const http = useContext(HttpContext)
   const fetchCoffees = async () => {
     try {
       const { data } = await http.get<Coffee[]>(fetchCoffeesUrl)
@@ -49,21 +59,33 @@ export const CoffeeManager = ({ children }: PropsWithChildren) => {
     }
   }
 
-  const setIngredientsFromExternalCoffes = (coffees: Coffee[]) => {
-    const ingredients = new Set(coffees.flatMap(c => c.ingredients))
-    setIngredients(() => [...ingredients])
-  }
-
   useEffect(() => {
-    fetchCoffees()
-    fetchExternalCoffees()
+  fetchCoffees()
+  fetchExternalCoffees()
+  fetchCoffeesGraphql()
+  fetchExternalCoffeesGraphql()
   }, [])
+ * 
+ * 
+ */
 
   return (
-    <CoffeeContext.Provider
-      value={{ coffees, order, setOrder, externalCoffees, ingredients }}
-    >
-      {children}
-    </CoffeeContext.Provider>
+    !(coffeeQueryResult.loading || externalCoffeeQueryResult.loading) &&
+    coffeeQueryResult.data &&
+    externalCoffeeQueryResult.data && (
+      <CoffeeContext.Provider
+        value={{
+          coffees: coffeeQueryResult.data.coffees,
+          order,
+          setOrder,
+          externalCoffees: externalCoffeeQueryResult.data.externalCoffees,
+          ingredients: setIngredientsFromExternalCoffees(
+            externalCoffeeQueryResult.data.externalCoffees,
+          ),
+        }}
+      >
+        {children}
+      </CoffeeContext.Provider>
+    )
   )
 }
