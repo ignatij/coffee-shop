@@ -1338,7 +1338,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@graphql-codegen/cli@npm:^5.0.0":
+"@graphql-codegen/cli@npm:5.0.0":
   version: 5.0.0
   resolution: "@graphql-codegen/cli@npm:5.0.0"
   dependencies:
@@ -1405,6 +1405,19 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@graphql-codegen/introspection@npm:4.0.0":
+  version: 4.0.0
+  resolution: "@graphql-codegen/introspection@npm:4.0.0"
+  dependencies:
+    "@graphql-codegen/plugin-helpers": "npm:^5.0.0"
+    "@graphql-codegen/visitor-plugin-common": "npm:^4.0.0"
+    tslib: "npm:~2.5.0"
+  peerDependencies:
+    graphql: ^0.8.0 || ^0.9.0 || ^0.10.0 || ^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0 || ^16.0.0
+  checksum: e78ab5038f62a07dd0604599614407ccde049adec0e9237d604e8508d0fda5136e57d9f6dd7f54a6f8a01ed760d8584e6cefabfe6667a8748b2b6660a8a48934
+  languageName: node
+  linkType: hard
+
 "@graphql-codegen/plugin-helpers@npm:^5.0.0, @graphql-codegen/plugin-helpers@npm:^5.0.1":
   version: 5.0.1
   resolution: "@graphql-codegen/plugin-helpers@npm:5.0.1"
@@ -1434,7 +1447,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@graphql-codegen/typescript-resolvers@npm:^4.0.1":
+"@graphql-codegen/typescript-resolvers@npm:4.0.1":
   version: 4.0.1
   resolution: "@graphql-codegen/typescript-resolvers@npm:4.0.1"
   dependencies:
@@ -1450,7 +1463,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@graphql-codegen/typescript@npm:^4.0.1":
+"@graphql-codegen/typescript@npm:4.0.1, @graphql-codegen/typescript@npm:^4.0.1":
   version: 4.0.1
   resolution: "@graphql-codegen/typescript@npm:4.0.1"
   dependencies:
@@ -1465,7 +1478,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@graphql-codegen/visitor-plugin-common@npm:4.0.1":
+"@graphql-codegen/visitor-plugin-common@npm:4.0.1, @graphql-codegen/visitor-plugin-common@npm:^4.0.0":
   version: 4.0.1
   resolution: "@graphql-codegen/visitor-plugin-common@npm:4.0.1"
   dependencies:
@@ -2935,9 +2948,10 @@ __metadata:
   resolution: "app@workspace:app"
   dependencies:
     "@apollo/server": "npm:^4.9.5"
-    "@graphql-codegen/cli": "npm:^5.0.0"
-    "@graphql-codegen/typescript": "npm:^4.0.1"
-    "@graphql-codegen/typescript-resolvers": "npm:^4.0.1"
+    "@graphql-codegen/cli": "npm:5.0.0"
+    "@graphql-codegen/introspection": "npm:4.0.0"
+    "@graphql-codegen/typescript": "npm:4.0.1"
+    "@graphql-codegen/typescript-resolvers": "npm:4.0.1"
     "@types/cors": "npm:^2.8.15"
     "@types/express": "npm:^4.17.20"
     "@types/node": "npm:^20.8.8"
@@ -4288,15 +4302,6 @@ __metadata:
   checksum: 869ae89ed6ff4bed7b373079dc58e5dddcf2915a2669b36037ff78c99d675ae930e5fe052b35c24f56557d28a023bb1cbe3e2f2fb87eaab96a1cedd7e597809d
   languageName: node
   linkType: hard
-
-"external-api-service@workspace:external-api-service":
-  version: 0.0.0-use.local
-  resolution: "external-api-service@workspace:external-api-service"
-  dependencies:
-    dotenv: "npm:^16.3.1"
-    express: "npm:^4.18.2"
-  languageName: unknown
-  linkType: soft
 
 "external-editor@npm:^3.0.3":
   version: 3.1.0

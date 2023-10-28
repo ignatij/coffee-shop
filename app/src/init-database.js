@@ -1,7 +1,5 @@
-'use strict'
-
-const { Client } = require('node-postgres')
-const dotenv = require('dotenv')
+import { Client } from 'node-postgres'
+import dotenv from 'dotenv'
 dotenv.config()
 
 const user = process.env.DB_USER

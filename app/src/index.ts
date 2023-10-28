@@ -1,15 +1,16 @@
-import express, { Express } from 'express'
-import dotenv from 'dotenv'
+import express, { type Express } from 'express'
+import * as dotenv from 'dotenv'
 dotenv.config()
-import { router as coffeesRouter } from './routes/coffee'
-import { initCoffees } from './service/startup'
-import { resolvers } from './resolvers'
+import { router as coffeesRouter } from './routes/coffee.js'
+import { initCoffees } from './service/startup.js'
+import { resolvers } from './resolvers/index.js'
 import cors from 'cors'
 import { ApolloServer } from '@apollo/server'
 import { startStandaloneServer } from '@apollo/server/standalone'
 import { readFileSync } from 'fs'
-import path from 'path'
-import { Coffee } from './__generated__/graphql'
+import { dirname, resolve } from 'path'
+import { fileURLToPath } from 'url'
+import type { Coffee } from './__generated__/graphql.js'
 
 const app: Express = express()
 const port = Number(process.env.PORT)
@@ -18,9 +19,12 @@ app.use(express.json())
 app.use(cors())
 app.use('/coffee', coffeesRouter)
 
-const typeDefs = readFileSync(path.resolve(__dirname + '/schema.graphql'), {
-  encoding: 'utf-8',
-})
+const typeDefs = readFileSync(
+  resolve(dirname(fileURLToPath(import.meta.url)) + '/schema.graphql'),
+  {
+    encoding: 'utf-8',
+  },
+)
 
 interface CoffeeContext {
   dataSources: {

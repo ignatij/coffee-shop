@@ -1,4 +1,6 @@
 import { Pool } from 'node-postgres'
+import * as dotenv from 'dotenv'
+dotenv.config()
 
 const user = process.env.DB_USER
 const password = process.env.DB_PASSWORD

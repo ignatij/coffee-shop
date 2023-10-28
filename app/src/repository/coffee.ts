@@ -1,6 +1,6 @@
-import { UUID, randomUUID } from 'crypto'
-import { pool } from '../infra/pool'
-import { Coffee } from '../model/coffee'
+import { type UUID, randomUUID } from 'crypto'
+import { pool } from '../infra/pool.js'
+import type { Coffee } from '../model/coffee.js'
 
 export const findAllQuery = 'select * from coffee'
 

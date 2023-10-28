@@ -1,9 +1,9 @@
-import { Request, Response, Router } from 'express'
+import { type Request, type Response, Router } from 'express'
 import {
   findAllCoffees,
   findExternalCoffees,
   insertCoffee,
-} from '../service/coffee'
+} from '../service/coffee.js'
 
 export const router = Router()
 

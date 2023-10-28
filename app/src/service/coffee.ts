@@ -1,6 +1,6 @@
 import axios from 'axios'
-import { Coffee } from '../model/coffee'
-import { findAll, insert } from '../repository/coffee'
+import type { Coffee } from '../model/coffee.js'
+import { findAll, insert } from '../repository/coffee.js'
 
 export const findAllCoffees = async (): Promise<Coffee[]> => {
   return await findAll()
