@@ -101,9 +101,19 @@ describe('CoffeeManager tests', () => {
     expect(option[1].textContent).toBe('Test external title 2')
 
     const list = await screen.findByRole('listbox')
-    
-    // await userEvent.click(option[0])
+
     await userEvent.selectOptions(list, option[0])
-    // await screen.debug()
+    const previewOrder = await screen.findByText('Preview order')
+    expect(previewOrder.textContent).toEqual('Preview order')
+
+    // title of coffee
+    const headings = await screen.findAllByRole('heading')
+    expect(headings[headings.length - 1].textContent).toEqual(
+      'Test external title 1',
+    )
+
+    // ingredient of the coffee
+    const ingredients = await screen.findByRole('listitem')
+    expect(ingredients.textContent).toEqual('ingredient 1')
   })
 })

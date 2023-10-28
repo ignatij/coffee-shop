@@ -1,26 +1,13 @@
-import { Select, Typography, Option } from '@mui/joy'
 import { useContext } from 'react'
-import { Coffee } from './coffee'
 import { CoffeeContext } from './CoffeeManager'
+import { ViewCoffees } from './shared/ViewCoffees'
 
 export const ExternalCoffeesSelector = () => {
-  const { externalCoffees, setOrder } = useContext(CoffeeContext)
+  const { externalCoffees } = useContext(CoffeeContext)
   return (
-    <>
-      <Typography level="h3">
-        Or choose a coffee from our external system
-      </Typography>
-      <Select
-        onChange={(_, c: Coffee | null) => {
-          setOrder(() => c ?? undefined)
-        }}
-      >
-        {externalCoffees.map((c: Coffee) => (
-          <Option key={c.id} value={c}>
-            {c.title}
-          </Option>
-        ))}
-      </Select>
-    </>
+    <ViewCoffees
+      title="Or choose a coffee from our external system"
+      coffees={externalCoffees}
+    />
   )
 }
