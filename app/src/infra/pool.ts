@@ -1,4 +1,6 @@
-import { Pool } from 'node-postgres'
+import pkg from 'pg'
+
+const { Pool } = pkg
 import * as dotenv from 'dotenv'
 dotenv.config()
 

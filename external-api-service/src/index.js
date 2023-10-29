@@ -22,5 +22,5 @@ app.get('/', (_, res) => {
 })
 
 app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
+  console.log(`External API service listening on port ${port}`)
 })

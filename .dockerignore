@@ -1,0 +1,12 @@
+
+.DS_Store
+.git/
+.circleci
+.idea
+.vscode
+
+docker
+node_modules
+**/node_modules
+/.yarn/cache
+**/dist

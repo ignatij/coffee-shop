@@ -5,8 +5,10 @@
   "scripts": {
     "app:init-db": "yarn workspace app run init-db",
     "app:dev": "yarn workspace app run dev",
+    "app:start": "yarn workspace app run start",
     "external-api-service:up": "yarn workspace external-api-service run start",
-    "ui:dev": "yarn workspace ui run dev"
+    "ui:dev": "yarn workspace ui run dev",
+    "ui:build": "yarn workspace ui run build"
   },
   "workspaces": [
     "app",

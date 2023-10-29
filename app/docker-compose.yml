@@ -1,6 +1,16 @@
-version: '3'
+version: '3.9'
 
 services:
   postgres:
-    image: postgres:16.0
-    ports: [5432:5432]
+    image: postgres:latest
+    ports:
+      - 5432:5432
+    volumes:
+      - postgres:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=postgres
+volumes:
+  postgres:
+    driver: local
