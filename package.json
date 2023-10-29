@@ -9,7 +9,7 @@
     "app:start": "yarn workspace app run start",
     "external-api-service:up": "yarn workspace external-api-service run start",
     "ui:dev": "yarn workspace ui run dev",
-    "ui:start": "yarn workspace ui run preview",
+    "ui:start": "yarn workspace ui run build && yarn workspace ui run preview",
     "ui:build": "yarn workspace ui run build"
   },
   "workspaces": [
