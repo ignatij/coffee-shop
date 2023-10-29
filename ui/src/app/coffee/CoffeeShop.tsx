@@ -3,14 +3,53 @@ import { DecorateCoffeeSelector } from './DecorateCoffeeSelector'
 import { ExternalCoffeesSelector } from './ExternalCoffeesSelector'
 import { PredefinedCoffeesSelector } from './PredefinedCoffeesSelector'
 import { PreviewCoffeeOrder } from './PreviewCoffeeOrder'
+import { styled } from '@mui/joy'
+
+const Container = styled('div')({
+  maxWidth: '1536px',
+  marginLeft: 'auto',
+  marginRight: 'auto',
+  minHeight: '100vh',
+  display: 'flex',
+})
+
+const InnerContainer = styled('div')({
+  display: 'flex',
+  width: '100%',
+  justifyContent: 'center',
+  alignItems: 'center',
+  gap: '30px',
+})
+
+const LeftContainer = styled('div')({
+  flexBasis: '66.666667%',
+  display: 'flex',
+  flexDirection: 'column',
+  gap: '20px'
+})
+
+const RightContainer = styled('div')({
+  flexBasis: '33.333333%',
+  display: 'flex',
+  flexDirection: 'column',
+  gap: '20px'
+})
 
 export const CoffeeShop = () => {
   return (
-    <CoffeeManager>
-      <PredefinedCoffeesSelector />
-      <ExternalCoffeesSelector />
-      <DecorateCoffeeSelector />
-      <PreviewCoffeeOrder />
-    </CoffeeManager>
+    <Container>
+      <CoffeeManager>
+        <InnerContainer>
+          <LeftContainer>
+            <PredefinedCoffeesSelector />
+            <ExternalCoffeesSelector />
+            <DecorateCoffeeSelector />
+          </LeftContainer>
+          <RightContainer>
+            <PreviewCoffeeOrder />
+          </RightContainer>
+        </InnerContainer>
+      </CoffeeManager>
+    </Container>
   )
 }

@@ -27,8 +27,10 @@ export const PreviewCoffeeOrder = () => {
     <>
       {order && (
         <>
-          <Typography level="h3">Preview order</Typography>
-          <Typography level="h4">{order?.title}</Typography>
+          <div>
+            <Typography level="h3">Preview order</Typography>
+            <Typography level="h4">{order?.title}</Typography>
+          </div>
           <div>
             <Typography level="body-xs">Ingredients</Typography>
             <List>
