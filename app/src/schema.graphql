@@ -4,7 +4,22 @@ type Coffee {
   ingredients: [String]
 }
 
+type Order {
+  id: String
+  coffee: Coffee
+  additionalIngredients: [String]
+}
+
 type Query {
   coffees: [Coffee]
   externalCoffees: [Coffee]
+}
+
+input CoffeeOrder {
+  title: String
+  ingredients: [String]
+}
+
+type Mutation {
+  addOrder(coffee: CoffeeOrder!, additionalIngredients: [String]): Order
 }

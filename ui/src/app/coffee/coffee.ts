@@ -1,10 +1,5 @@
 import { gql } from '@apollo/client'
-
-export interface Coffee {
-  id: string
-  title: string
-  ingredients: string[]
-}
+import { Coffee } from '../../../../app/src/__generated__/graphql'
 
 export interface DecoratedCoffee extends Coffee {
   coffee: Coffee

@@ -36,6 +36,9 @@ const createDatabase = async () => {
     await dbClient.query(
       `CREATE TABLE coffee (id UUID NOT NULL, title TEXT NOT NULL, ingredients TEXT[] DEFAULT '{}')`,
     )
+    await dbClient.query(
+      `CREATE TABLE coffee_order (id UUID NOT NULL, title TEXT NOT NULL, ingredients TEXT[] DEFAULT '{}', additional_ingredients TEXT[] DEFAULT '{}')`,
+    )
     return true
   } catch (e) {
     console.error(e)

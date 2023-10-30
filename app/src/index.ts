@@ -10,7 +10,6 @@ import { startStandaloneServer } from '@apollo/server/standalone'
 import { readFileSync } from 'fs'
 import { dirname, resolve } from 'path'
 import { fileURLToPath } from 'url'
-import type { Coffee } from './__generated__/graphql.js'
 
 const app: Express = express()
 const port = Number(process.env.PORT)
@@ -25,13 +24,6 @@ const typeDefs = readFileSync(
     encoding: 'utf-8',
   },
 )
-
-interface CoffeeContext {
-  dataSources: {
-    coffees: Coffee[]
-    externalCoffees: Coffee[]
-  }
-}
 
 const server = new ApolloServer<any>({
   typeDefs,
