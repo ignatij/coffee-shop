@@ -7,10 +7,10 @@ import React, {
 } from 'react'
 import {
   Coffee,
-  OrderInput,
   addOrderMutation,
   getCoffeeQuery,
   getExternalCoffeeQuery,
+  OrderInput,
 } from './coffee'
 
 export type CoffeeContextType = {
@@ -47,16 +47,6 @@ export const CoffeeManager = ({ children }: PropsWithChildren) => {
     console.error(addOrderResult.error)
     throw new Error('Error while creating an Order')
   }
-
-  // if (data) {
-  //   console.log("DAA")
-  //   const newOrderId = data.addOrder.id
-  //   setPlacedOrder(() => newOrderId)
-  // }
-
-  // if (error) {
-  //   console.error(error)
-  // }
 
   /**
  * the REST way, we would have the following functions

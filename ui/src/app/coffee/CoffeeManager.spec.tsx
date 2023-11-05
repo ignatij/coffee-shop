@@ -94,16 +94,40 @@ describe('CoffeeManager tests', () => {
     expect(option[1].textContent).toBe('Test external title 2')
   })
 
-  it('should have ingredients on screen after clicking on corresponding select button', async () => {
+  it('should show toppings when there is an order in preparation', async () => {
     const buttons = await screen.findAllByRole('combobox')
 
-    // ingredients click
-    await userEvent.click(buttons[2])
+    // external coffees click
+    await userEvent.click(buttons[1])
 
     const option = await screen.findAllByRole('option')
-    expect(option[0].textContent).toBe('ingredient 1')
-    expect(option[1].textContent).toBe('ingredient 2')
-    expect(option[2].textContent).toBe('ingredient 3')
+    expect(option[0].textContent).toBe('Test external title 1')
+    expect(option[1].textContent).toBe('Test external title 2')
+
+    const list = await screen.findByRole('listbox')
+
+    await userEvent.selectOptions(list, option[0])
+    const checkboxes = await screen.findAllByRole('checkbox')
+
+    // select one additional topping
+    await userEvent.click(checkboxes[0])
+
+    const additionalIngredientsSection = await screen.findByText(
+      'Additional Ingredients',
+    )
+    // the section should be shown
+    expect(additionalIngredientsSection.textContent).toEqual(
+      'Additional Ingredients',
+    )
+
+    // toggle the same topping
+    await userEvent.click(checkboxes[0])
+    const hiddenAdditionalIngredientsSection = await screen.queryAllByText(
+      'Additional Ingredients',
+    )
+
+    // section for additional toppings should be hidden
+    expect(hiddenAdditionalIngredientsSection.length).toEqual(0)
   })
 
   it('should have order previewed on screen', async () => {

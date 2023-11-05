@@ -44,9 +44,9 @@ export const CoffeeShop = () => {
           <LeftContainer>
             <PredefinedCoffeesSelector />
             <ExternalCoffeesSelector />
-            <DecorateCoffeeSelector />
           </LeftContainer>
           <RightContainer>
+          <DecorateCoffeeSelector />
             <PreviewCoffeeOrder />
             <PlacedOrders />
           </RightContainer>
