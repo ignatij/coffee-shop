@@ -1,9 +1,10 @@
+import { styled } from '@mui/joy'
 import { CoffeeManager } from './CoffeeManager'
 import { DecorateCoffeeSelector } from './DecorateCoffeeSelector'
 import { ExternalCoffeesSelector } from './ExternalCoffeesSelector'
+import { PlacedOrders } from './PlacedOrders'
 import { PredefinedCoffeesSelector } from './PredefinedCoffeesSelector'
 import { PreviewCoffeeOrder } from './PreviewCoffeeOrder'
-import { styled } from '@mui/joy'
 
 const Container = styled('div')({
   maxWidth: '1536px',
@@ -25,14 +26,14 @@ const LeftContainer = styled('div')({
   flexBasis: '66.666667%',
   display: 'flex',
   flexDirection: 'column',
-  gap: '20px'
+  gap: '20px',
 })
 
 const RightContainer = styled('div')({
   flexBasis: '33.333333%',
   display: 'flex',
   flexDirection: 'column',
-  gap: '20px'
+  gap: '20px',
 })
 
 export const CoffeeShop = () => {
@@ -47,6 +48,7 @@ export const CoffeeShop = () => {
           </LeftContainer>
           <RightContainer>
             <PreviewCoffeeOrder />
+            <PlacedOrders />
           </RightContainer>
         </InnerContainer>
       </CoffeeManager>

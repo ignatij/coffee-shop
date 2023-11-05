@@ -1,10 +1,10 @@
+import { Button, List, ListItem, ListItemDecorator, Typography } from '@mui/joy'
 import { useContext } from 'react'
 import { CoffeeContext } from './CoffeeManager'
-import { Typography, ListItem, ListItemDecorator, List } from '@mui/joy'
 import { Coffee, DecoratedCoffee } from './coffee'
 
 export const PreviewCoffeeOrder = () => {
-  const { order } = useContext(CoffeeContext)
+  const { order, addOrder } = useContext(CoffeeContext)
 
   const getAdditionalIngredients = (
     decoratedOrder: Coffee | undefined,
@@ -21,6 +21,19 @@ export const PreviewCoffeeOrder = () => {
   const prepareAdditionaIngredients = (): string[] => {
     // remove the initial ''
     return getAdditionalIngredients(order).slice(1)
+  }
+
+  const addNewOrder = () => {
+    const additionalIngredients = prepareAdditionaIngredients()
+    addOrder({
+      variables: {
+        order: {
+          title: order?.title || '',
+          ingredients: order?.ingredients || [],
+          additionalIngredients,
+        },
+      },
+    })
   }
 
   return (
@@ -55,6 +68,9 @@ export const PreviewCoffeeOrder = () => {
               </div>
             </>
           )}
+          <div>
+            <Button onClick={addNewOrder}>Create Order</Button>
+          </div>
         </>
       )}
     </>

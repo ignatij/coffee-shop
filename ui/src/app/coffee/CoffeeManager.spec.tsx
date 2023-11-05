@@ -1,12 +1,13 @@
-import { describe, it, expect, vi, beforeEach } from 'vitest'
 import { render, screen } from '@testing-library/react'
-import { CoffeeManager } from './CoffeeManager'
-import { getCoffeeQuery, getExternalCoffeeQuery } from './coffee'
-import { PredefinedCoffeesSelector } from './PredefinedCoffeesSelector'
-import { ExternalCoffeesSelector } from './ExternalCoffeesSelector'
-import { DecorateCoffeeSelector } from './DecorateCoffeeSelector'
-import { PreviewCoffeeOrder } from './PreviewCoffeeOrder'
 import userEvent from '@testing-library/user-event'
+import { beforeEach, describe, expect, it, vi } from 'vitest'
+import { CoffeeManager } from './CoffeeManager'
+import { DecorateCoffeeSelector } from './DecorateCoffeeSelector'
+import { ExternalCoffeesSelector } from './ExternalCoffeesSelector'
+import { PlacedOrders } from './PlacedOrders'
+import { PredefinedCoffeesSelector } from './PredefinedCoffeesSelector'
+import { PreviewCoffeeOrder } from './PreviewCoffeeOrder'
+import { getCoffeeQuery, getExternalCoffeeQuery } from './coffee'
 
 describe('CoffeeManager tests', () => {
   vi.mock('@apollo/client', () => {
@@ -43,7 +44,21 @@ describe('CoffeeManager tests', () => {
       }
     })
     const gql = vi.fn().mockImplementation(arg => arg)
-    return { useQuery, gql }
+
+    const useMutation = vi.fn().mockImplementation(() => {
+      return [
+        () => {},
+        {
+          data: {
+            addOrder: {
+              id: 'test-id',
+            },
+          },
+        },
+      ]
+    })
+
+    return { useQuery, useMutation, gql }
   })
 
   beforeEach(() => {
@@ -53,6 +68,7 @@ describe('CoffeeManager tests', () => {
         <ExternalCoffeesSelector />
         <DecorateCoffeeSelector />
         <PreviewCoffeeOrder />
+        <PlacedOrders />
       </CoffeeManager>,
     )
   })
@@ -115,5 +131,41 @@ describe('CoffeeManager tests', () => {
     // ingredient of the coffee
     const ingredients = await screen.findByRole('listitem')
     expect(ingredients.textContent).toEqual('ingredient 1')
+  })
+
+  it('should make an order', async () => {
+    const buttons = await screen.findAllByRole('combobox')
+
+    // external coffees click
+    await userEvent.click(buttons[1])
+
+    const option = await screen.findAllByRole('option')
+    expect(option[0].textContent).toBe('Test external title 1')
+    expect(option[1].textContent).toBe('Test external title 2')
+
+    const list = await screen.findByRole('listbox')
+
+    await userEvent.selectOptions(list, option[0])
+    const previewOrder = await screen.findByText('Preview order')
+    expect(previewOrder.textContent).toEqual('Preview order')
+
+    // title of coffee
+    const headings = await screen.findAllByRole('heading')
+    expect(headings[headings.length - 1].textContent).toEqual(
+      'Test external title 1',
+    )
+
+    // ingredient of the coffee
+    const ingredients = await screen.findByRole('listitem')
+    expect(ingredients.textContent).toEqual('ingredient 1')
+
+    const createOrderBtn = await screen.findByText('Create Order')
+    await userEvent.click(createOrderBtn)
+
+    const placedOrderDiv = await screen.findByText(
+      'You have placed a new order with id test-id!',
+    )
+
+    expect(placedOrderDiv).toBeTruthy()
   })
 })

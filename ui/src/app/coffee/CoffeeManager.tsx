@@ -1,11 +1,17 @@
-import { useQuery } from '@apollo/client'
+import { useMutation, useQuery } from '@apollo/client'
 import React, {
   Dispatch,
   PropsWithChildren,
   SetStateAction,
   useState,
 } from 'react'
-import { Coffee, getCoffeeQuery, getExternalCoffeeQuery } from './coffee'
+import {
+  Coffee,
+  OrderInput,
+  addOrderMutation,
+  getCoffeeQuery,
+  getExternalCoffeeQuery,
+} from './coffee'
 
 export type CoffeeContextType = {
   coffees: Coffee[]
@@ -13,6 +19,8 @@ export type CoffeeContextType = {
   setOrder: Dispatch<SetStateAction<Coffee | undefined>>
   externalCoffees: Coffee[]
   ingredients: string[]
+  addOrder: (obj: { variables: { order: OrderInput } }) => {}
+  placedOrder: string | undefined
 }
 
 export const CoffeeContext = React.createContext({} as CoffeeContextType)
@@ -33,6 +41,22 @@ export const CoffeeManager = ({ children }: PropsWithChildren) => {
     const ingredients = new Set(coffees.flatMap((c: Coffee) => c.ingredients))
     return [...ingredients]
   }
+
+  const [addOrder, addOrderResult] = useMutation(addOrderMutation)
+  if (addOrderResult.error) {
+    console.error(addOrderResult.error)
+    throw new Error('Error while creating an Order')
+  }
+
+  // if (data) {
+  //   console.log("DAA")
+  //   const newOrderId = data.addOrder.id
+  //   setPlacedOrder(() => newOrderId)
+  // }
+
+  // if (error) {
+  //   console.error(error)
+  // }
 
   /**
  * the REST way, we would have the following functions
@@ -82,6 +106,8 @@ export const CoffeeManager = ({ children }: PropsWithChildren) => {
           ingredients: setIngredientsFromExternalCoffees(
             externalCoffeeQueryResult.data.externalCoffees,
           ),
+          addOrder,
+          placedOrder: addOrderResult?.data?.addOrder.id,
         }}
       >
         {children}

@@ -1,5 +1,5 @@
 import { gql } from '@apollo/client'
-import { Coffee } from '../../../../app/src/__generated__/graphql'
+import { Coffee, OrderInput } from '../../../../app/src/__generated__/graphql'
 
 export interface DecoratedCoffee extends Coffee {
   coffee: Coffee
@@ -31,3 +31,14 @@ export const getExternalCoffeeQuery = gql`
   }
   ${coffeeFields}
 `
+
+export const addOrderMutation = gql`
+  mutation AddOrder($order: OrderInput!) {
+    addOrder(order: $order) {
+      id
+    }
+  }
+`
+
+export type { Coffee, OrderInput }
+
