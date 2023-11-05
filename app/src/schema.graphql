@@ -1,12 +1,17 @@
 type Coffee {
-  id: String
-  title: String
-  ingredients: [String]
+  id: String!
+  title: String!
+  ingredients: [String!]!
+}
+
+type CoffeeOrder {
+  title: String!
+  ingredients: [String!]!
 }
 
 type Order {
-  id: String
-  coffee: Coffee
+  id: String!
+  coffee: CoffeeOrder!
   additionalIngredients: [String]
 }
 
@@ -15,11 +20,12 @@ type Query {
   externalCoffees: [Coffee]
 }
 
-input CoffeeOrder {
-  title: String
-  ingredients: [String]
+input OrderInput {
+  title: String!
+  ingredients: [String!]!
+  additionalIngredients: [String]
 }
 
 type Mutation {
-  addOrder(coffee: CoffeeOrder!, additionalIngredients: [String]): Order
+  addOrder(order: OrderInput!): Order
 }

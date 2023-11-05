@@ -1,10 +1,7 @@
-import { Coffee, Order } from '../__generated__/graphql.js'
+import { Order, OrderInput } from '../__generated__/graphql.js'
 import * as orderRepository from '../repository/order.js'
 
-export const addOrder = async (
-  coffee: Coffee,
-  additionalIngredients?: string[],
-): Promise<Order> => {
-  const order = await orderRepository.insert(coffee, additionalIngredients)
-  return order
+export const addOrder = async (order: OrderInput): Promise<Order> => {
+  const newOrder = await orderRepository.insert(order)
+  return newOrder
 }

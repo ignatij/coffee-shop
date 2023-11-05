@@ -9,7 +9,7 @@
     "build": "yarn tsc && yarn copyfiles -u 1 src/*.graphql dist/",
     "compile": "yarn generate && yarn build",
     "start": "yarn compile && node ./dist/index.js",
-    "dev": "concurrently \"yarn tsc --watch && yarn copyfiles -u 1 src/*.graphql dist/\" \"nodemon -q ./dist/index.js\""
+    "dev": "concurrently \"yarn generate\" \"yarn copyfiles -u 1 src/*.graphql dist/\" \"yarn tsc --watch\"  \"nodemon -q ./dist/index.js\""
   },
   "dependencies": {
     "@apollo/server": "^4.9.5",

@@ -18,33 +18,38 @@ export type Scalars = {
 
 export type Coffee = {
   __typename?: 'Coffee';
-  id?: Maybe<Scalars['String']['output']>;
-  ingredients?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
-  title?: Maybe<Scalars['String']['output']>;
+  id: Scalars['String']['output'];
+  ingredients: Array<Scalars['String']['output']>;
+  title: Scalars['String']['output'];
 };
 
 export type CoffeeOrder = {
-  ingredients?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  title?: InputMaybe<Scalars['String']['input']>;
+  __typename?: 'CoffeeOrder';
+  ingredients: Array<Scalars['String']['output']>;
+  title: Scalars['String']['output'];
 };
 
 export type Mutation = {
   __typename?: 'Mutation';
   addOrder?: Maybe<Order>;
-  test?: Maybe<Order>;
 };
 
 
 export type MutationAddOrderArgs = {
-  additionalIngredients?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  coffee: CoffeeOrder;
+  order: OrderInput;
 };
 
 export type Order = {
   __typename?: 'Order';
   additionalIngredients?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
-  coffee?: Maybe<Coffee>;
-  id?: Maybe<Scalars['String']['output']>;
+  coffee: CoffeeOrder;
+  id: Scalars['String']['output'];
+};
+
+export type OrderInput = {
+  additionalIngredients?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  ingredients: Array<Scalars['String']['input']>;
+  title: Scalars['String']['input'];
 };
 
 export type Query = {
@@ -126,9 +131,10 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 export type ResolversTypes = {
   Boolean: ResolverTypeWrapper<Scalars['Boolean']['output']>;
   Coffee: ResolverTypeWrapper<Coffee>;
-  CoffeeOrder: CoffeeOrder;
+  CoffeeOrder: ResolverTypeWrapper<CoffeeOrder>;
   Mutation: ResolverTypeWrapper<{}>;
   Order: ResolverTypeWrapper<Order>;
+  OrderInput: OrderInput;
   Query: ResolverTypeWrapper<{}>;
   String: ResolverTypeWrapper<Scalars['String']['output']>;
 };
@@ -140,26 +146,32 @@ export type ResolversParentTypes = {
   CoffeeOrder: CoffeeOrder;
   Mutation: {};
   Order: Order;
+  OrderInput: OrderInput;
   Query: {};
   String: Scalars['String']['output'];
 };
 
 export type CoffeeResolvers<ContextType = any, ParentType extends ResolversParentTypes['Coffee'] = ResolversParentTypes['Coffee']> = {
-  id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  ingredients?: Resolver<Maybe<Array<Maybe<ResolversTypes['String']>>>, ParentType, ContextType>;
-  title?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  id?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  ingredients?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
+  title?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type CoffeeOrderResolvers<ContextType = any, ParentType extends ResolversParentTypes['CoffeeOrder'] = ResolversParentTypes['CoffeeOrder']> = {
+  ingredients?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
+  title?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type MutationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
-  addOrder?: Resolver<Maybe<ResolversTypes['Order']>, ParentType, ContextType, RequireFields<MutationAddOrderArgs, 'coffee'>>;
-  test?: Resolver<Maybe<ResolversTypes['Order']>, ParentType, ContextType>;
+  addOrder?: Resolver<Maybe<ResolversTypes['Order']>, ParentType, ContextType, RequireFields<MutationAddOrderArgs, 'order'>>;
 };
 
 export type OrderResolvers<ContextType = any, ParentType extends ResolversParentTypes['Order'] = ResolversParentTypes['Order']> = {
   additionalIngredients?: Resolver<Maybe<Array<Maybe<ResolversTypes['String']>>>, ParentType, ContextType>;
-  coffee?: Resolver<Maybe<ResolversTypes['Coffee']>, ParentType, ContextType>;
-  id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  coffee?: Resolver<ResolversTypes['CoffeeOrder'], ParentType, ContextType>;
+  id?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -170,6 +182,7 @@ export type QueryResolvers<ContextType = any, ParentType extends ResolversParent
 
 export type Resolvers<ContextType = any> = {
   Coffee?: CoffeeResolvers<ContextType>;
+  CoffeeOrder?: CoffeeOrderResolvers<ContextType>;
   Mutation?: MutationResolvers<ContextType>;
   Order?: OrderResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
