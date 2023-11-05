@@ -1,0 +1,30 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+	{
+		"type": "shell",
+		"label": "Init DB Container",
+		"command": "yarn start-local-db"
+	  },
+    {
+      "type": "shell",
+      "label": "Init Database",
+      "command": "yarn app:init-db"
+    },
+    {
+      "type": "shell",
+      "label": "App",
+      "command": "yarn app:dev"
+    },
+    {
+      "type": "shell",
+      "label": "External API Service",
+      "command": "yarn external-api-service:up"
+    },
+	{
+		"type": "shell",
+		"label": "UI",
+		"command": "yarn ui:dev"
+	  }
+  ]
+}
