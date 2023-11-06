@@ -1,11 +1,18 @@
 import { Box, Checkbox, Chip, Typography } from '@mui/joy'
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { CoffeeContext } from './CoffeeManager'
 import { Coffee, DecoratedCoffee } from './coffee'
 
 export const DecorateCoffeeSelector = () => {
   const { setOrder, ingredients, order } = useContext(CoffeeContext)
   const [selected, setSelected] = React.useState<string[]>([])
+
+  useEffect(() => {
+    if (!(order as DecoratedCoffee)?.additionalIngredient) {
+      // reset selected only when a coffee is changed
+      setSelected([])
+    }
+  }, [order])
 
   const decorateOrder = (ingredient: string) => {
     setOrder(

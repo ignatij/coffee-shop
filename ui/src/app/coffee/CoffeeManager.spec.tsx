@@ -64,8 +64,16 @@ describe('CoffeeManager tests', () => {
   beforeEach(() => {
     render(
       <CoffeeManager>
-        <PredefinedCoffeesSelector />
-        <ExternalCoffeesSelector />
+        <PredefinedCoffeesSelector
+          value={null}
+          setValue={() => {}}
+          resetFn={() => {}}
+        />
+        <ExternalCoffeesSelector
+          value={null}
+          setValue={() => {}}
+          resetFn={() => {}}
+        />
         <DecorateCoffeeSelector />
         <PreviewCoffeeOrder />
         <PlacedOrders />

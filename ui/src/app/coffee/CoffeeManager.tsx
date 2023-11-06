@@ -7,10 +7,10 @@ import React, {
 } from 'react'
 import {
   Coffee,
+  OrderInput,
   addOrderMutation,
   getCoffeeQuery,
   getExternalCoffeeQuery,
-  OrderInput,
 } from './coffee'
 
 export type CoffeeContextType = {
@@ -44,7 +44,7 @@ export const CoffeeManager = ({ children }: PropsWithChildren) => {
 
   const [addOrder, addOrderResult] = useMutation(addOrderMutation)
   if (addOrderResult.error) {
-    console.error(addOrderResult.error)
+    console.error('Error with Apollo client', addOrderResult.error)
     throw new Error('Error while creating an Order')
   }
 

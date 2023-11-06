@@ -1,12 +1,21 @@
+import { Box, Option, Select, Typography } from '@mui/joy'
 import { PropsWithChildren, useContext } from 'react'
-import { Coffee } from '../coffee'
 import { CoffeeContext } from '../CoffeeManager'
-import { Select, Typography, Option, Box } from '@mui/joy'
+import { Coffee } from '../coffee'
 
 export const ViewCoffees = ({
   coffees,
   title,
-}: PropsWithChildren<{ coffees: Coffee[]; title: string }>) => {
+  value,
+  setValue,
+  resetFn,
+}: PropsWithChildren<{
+  coffees: Coffee[]
+  title: string
+  value: Coffee | null | undefined
+  setValue: (c: Coffee) => void
+  resetFn: (c: Coffee | null) => void
+}>) => {
   const { setOrder } = useContext(CoffeeContext)
   return (
     <Box sx={{ display: 'flex', gap: '20px' }}>
@@ -15,9 +24,12 @@ export const ViewCoffees = ({
       </Typography>
       <Select
         sx={{ flexBasis: '33.333333', display: 'flex', flexGrow: '1' }}
+        value={value}
         onChange={(_, c: Coffee | null) => {
           if (c) {
             setOrder(() => c)
+            setValue(c)
+            resetFn(null)
           }
         }}
       >
