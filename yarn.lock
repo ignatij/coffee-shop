@@ -3373,7 +3373,6 @@ __metadata:
     copyfiles: "npm:^2.4.1"
     cors: "npm:^2.8.5"
     dotenv: "npm:^16.3.1"
-    express: "npm:^4.18.2"
     graphql: "npm:^16.8.1"
     nodemon: "npm:^3.0.1"
     pg: "npm:^8.11.3"

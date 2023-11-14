@@ -1,22 +1,26 @@
-import { type Request, type Response, Router } from 'express'
-import {
-  findAllCoffees,
-  findExternalCoffees,
-  insertCoffee,
-} from '../service/coffee.js'
+/**
+ * File not used anymore. Kept for showcasing purposes in case we used REST and not GraphQL.
+ */
 
-export const router = Router()
+// import { type Request, type Response, Router } from 'express'
+// import {
+//   findAllCoffees,
+//   findExternalCoffees,
+//   insertCoffee,
+// } from '../service/coffee.js'
 
-router.get('/', async (_, response: Response) => {
-  return response.json(await findAllCoffees())
-})
+// export const router = Router()
 
-router.post('/', async (req: Request, response: Response) => {
-  return response.json(
-    await insertCoffee(req.body['title'], req.body['ingredients']),
-  )
-})
+// router.get('/', async (_, response: Response) => {
+//   return response.json(await findAllCoffees())
+// })
 
-router.get('/external', async (_, response: Response) =>
-  response.json(await findExternalCoffees()),
-)
+// router.post('/', async (req: Request, response: Response) => {
+//   return response.json(
+//     await insertCoffee(req.body['title'], req.body['ingredients']),
+//   )
+// })
+
+// router.get('/external', async (_, response: Response) =>
+//   response.json(await findExternalCoffees()),
+// )
